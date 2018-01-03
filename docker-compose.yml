@@ -1,0 +1,21 @@
+version: "3"
+services:
+  web:
+    build: .
+    ports:
+      - "80:3000"
+    command: bundle exec puma
+    volumes:
+      - ./src:/src/sample_rails_app_with_docker
+      - bundle-data:/bundle
+    depends_on:
+      - db
+  db:
+    image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  bundle-data:
+  db-data:
+
